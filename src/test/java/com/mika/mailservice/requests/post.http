@@ -1,0 +1,15 @@
+POST http://localhost:8088/mail/send/mime
+Content-Type: application/json
+
+
+{
+    "from":"",
+    "to":"forreg@i.ua",
+    "cc":"",
+    "bcc":"",
+    "subject":"email subject",
+    "text":"text"
+}
+
+
+###
