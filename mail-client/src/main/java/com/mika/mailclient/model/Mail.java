@@ -2,9 +2,13 @@ package com.mika.mailclient.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Mail {
     private String from = "";
     private String to;

@@ -1,14 +1,13 @@
 package com.mika.mailservice.services.impl;
 
-import com.mika.mailclient.MailClient;
 import com.mika.mailclient.model.Mail;
+import com.mika.mailservice.services.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.scheduling.annotation.Async;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -18,7 +17,7 @@ import javax.ws.rs.core.Response;
 
 @Slf4j
 @Path("/mail")
-public class MailServiceImpl implements MailClient {
+public class MailServiceImpl implements MailService {
 
     private JavaMailSender emailSender;
 
@@ -32,12 +31,11 @@ public class MailServiceImpl implements MailClient {
         return Response.ok("Serive is running").build();
     }
 
-
     @POST
     @Path("/send/mime")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Async("threadPoolExecutor")
+    //@Async("threadPoolExecutor")
     public HttpStatus sendMimeMessage(Mail email) {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -57,7 +55,7 @@ public class MailServiceImpl implements MailClient {
     @Path("/send/simple")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Async("threadPoolExecutor")
+    //@Async("threadPoolExecutor")
     public HttpStatus sendSimpleMail(Mail email) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email.getTo());
